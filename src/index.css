@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-gold: #b8914a;
+  --color-gold-soft: #e9d8b4;
+  --color-gold-deep: #8a6a2f;
+  --color-ink: #1c1917;
+  --color-cream: #f7f4ee;
+}
+
+html { scroll-behavior: auto; }
+body { font-family: var(--font-sans); color: var(--color-ink); background: #ffffff; overflow-x: hidden; }
+::selection { background: #e9d8b4; color: #1c1917; }
+.text-shadow { text-shadow: 0 2px 30px rgba(0, 0, 0, .45); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #b8914a66; border-radius: 3px; }
+
+/* ---------- Form controls ---------- */
+
+.field { position: relative; display: block; }
+.field-input {
+  width: 100%; height: 58px; padding: 24px 16px 8px; border-radius: 14px;
+  background: #fff; border: 1px solid #e7e5e4; color: var(--color-ink); font-size: 15px;
+  outline: none; transition: border-color .2s, box-shadow .2s, background .2s;
+  appearance: none; -webkit-appearance: none;
+}
+.field-input:hover { border-color: #d6d3d1; }
+.field-input:focus { border-color: var(--color-gold); box-shadow: 0 0 0 4px rgb(184 145 74 / .14); }
+textarea.field-input { height: auto; min-height: 120px; padding-top: 28px; resize: vertical; line-height: 1.5; }
+select.field-input, .select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer;
+}
+.field-label {
+  position: absolute; left: 17px; top: 19px; font-size: 15px; color: #a8a29e;
+  pointer-events: none; transform-origin: left top; transition: all .18s ease;
+}
+.field-input:focus + .field-label,
+.field-input:not(:placeholder-shown) + .field-label,
+select.field-input + .field-label,
+input[type="date"].field-input + .field-label {
+  top: 9px; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-gold-deep); font-weight: 500;
+}
+.field-input::placeholder { color: transparent; }
+input[type="date"].field-input::-webkit-calendar-picker-indicator { opacity: .5; cursor: pointer; }
+
+.select {
+  appearance: none; -webkit-appearance: none; height: 48px; padding-left: 18px; border-radius: 999px;
+  background-color: #fff; border: 1px solid #e7e5e4; font-size: 13px; color: var(--color-ink); outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.select:focus { border-color: var(--color-gold); box-shadow: 0 0 0 4px rgb(184 145 74 / .14); }
+
+/* range slider with a filled track (set --p to the percentage) */
+.range { -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer; }
+.range::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 4px;
+  background: linear-gradient(to right, var(--color-gold) 0 var(--p, 50%), #e7e5e4 var(--p, 50%) 100%);
+}
+.range::-moz-range-track { height: 4px; border-radius: 4px; background: #e7e5e4; }
+.range::-moz-range-progress { height: 4px; border-radius: 4px; background: var(--color-gold); }
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; margin-top: -8px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--color-gold); box-shadow: 0 2px 8px rgb(28 25 23 / .18);
+  transition: transform .15s;
+}
+.range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 2px solid var(--color-gold); box-shadow: 0 2px 8px rgb(28 25 23 / .18); }
+.range:active::-webkit-slider-thumb { transform: scale(1.15); }
+.range:focus-visible { outline: none; }
+.range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgb(184 145 74 / .2); }
+
+/* checkbox */
+.check {
+  appearance: none; -webkit-appearance: none; flex: none; width: 20px; height: 20px; border-radius: 6px;
+  border: 1.5px solid #d6d3d1; background: #fff center / 12px no-repeat; cursor: pointer; transition: all .15s;
+}
+.check:checked {
+  background-color: var(--color-ink); border-color: var(--color-ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+}
+.check:focus-visible { outline: none; box-shadow: 0 0 0 4px rgb(184 145 74 / .2); }
